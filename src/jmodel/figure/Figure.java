@@ -26,6 +26,15 @@ public abstract class Figure {
 
     public abstract void update(Graphics g);
     
+    public Shape getBackground() {
+        if(!this.shapes.isEmpty()) {
+            return this.getShapes().get(this.shapes.size() - 1);
+        }
+        else {
+            return null;
+        }
+    }
+    
     public void addHandlers() {
         if(this.shapes.isEmpty()) {
             return;

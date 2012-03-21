@@ -3,6 +3,8 @@ package jmodel.frame;
 import jmodel.model.*;
 import jmodel.figure.*;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import javax.swing.*;
@@ -26,9 +28,13 @@ public class MiniFrame extends JPanel {
     private ArrayList<String> handlerList;
     private ArrayList<Figure> figures;
 
+    Node currentNode;
 
     public MiniFrame(Graphics graphics) {
         super();
+        this.registerMouseEvents();
+
+        this.currentNode = null;
         this.graphics = graphics;
         model = new Model();
         this.shapes = new ArrayList<Shape>();
@@ -42,7 +48,9 @@ public class MiniFrame extends JPanel {
     
     public MiniFrame(Model model, Graphics graphics) {
         super();
+        this.registerMouseEvents();
         this.graphics = graphics;
+        this.currentNode = null;
         this.setModel(model);
     }
     
@@ -174,6 +182,31 @@ public class MiniFrame extends JPanel {
         for(int index = 0; index != this.handlers.size(); ++index) {
             g2d.draw(this.handlers.get(index));
         }
+    }
+
+    private void registerMouseEvents() {
+        this.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseClicked(MouseEvent mouseEvent) {
+                boolean isSelected = false;
+                Point point = mouseEvent.getPoint();
+                for(int index = 0; index != figures.size(); ++index) {
+                    if(figures.get(index).getBackground().contains(point)) {
+                        addHandlerById(model.getNodes().get(index).getId());
+                        currentNode = model.getNodes().get(index);
+                        isSelected = true;
+                    }
+                    else {
+                        removeHandlerById(model.getNodes().get(index).getId());
+                    }
+                }
+                if(!isSelected) {
+                    currentNode = null;
+                }
+                repaint();
+            }
+        });
     }
     
 }
