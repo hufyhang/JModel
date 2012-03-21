@@ -11,21 +11,21 @@ import java.util.ArrayList;
 public class Model {
     public static enum MODEL_TYPE {NONE, CLASS};
     
-    private ArrayList<ClassNode> nodes;
+    private ArrayList<Node> nodes;
     
     public Model() {
-        this.nodes = new ArrayList<ClassNode>();
+        this.nodes = new ArrayList<Node>();
     }
     
-    public ArrayList<ClassNode> getNodes() {
+    public ArrayList<Node> getNodes() {
         return this.nodes;
     }
     
-    public void setNodes(ArrayList<ClassNode> nodes) {
+    public void setNodes(ArrayList<Node> nodes) {
         this.nodes = nodes;
     }
     
-    public void addNode(ClassNode node) {
+    public void addNode(Node node) {
         this.getNodes().add(node);
     }
 

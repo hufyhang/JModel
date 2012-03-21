@@ -39,6 +39,8 @@ public class ClassNodeFigure extends Figure {
         y = this.getY() + fontHeight;
         Point point = new Point(x, y);
         this.addString(title, point);
+
+        this.checkWidth(fontWidth);
                 
         // add separator
         x = this.getX();
@@ -52,6 +54,8 @@ public class ClassNodeFigure extends Figure {
             x = this.getX() + (this.getWidth() / 2 - fontWidth / 2);
             this.addString(attribute, new Point(x, y));
             y += fontHeight;
+
+            this.checkWidth(fontWidth);
         }
         
         // add separator
@@ -65,6 +69,8 @@ public class ClassNodeFigure extends Figure {
             x = this.getX() + (this.getWidth() / 2 - fontWidth / 2);
             this.addString(signal, new Point(x, y));
             y += fontHeight;
+
+            this.checkWidth(fontWidth);
         }
         this.setHeight(y - this.getY());
         
@@ -72,30 +78,4 @@ public class ClassNodeFigure extends Figure {
         this.addShape(new Rectangle2D.Float(this.getX(), this.getY(), this.getWidth(), this.getHeight()));
     }
 
-    public void draw(Graphics g) {
-        Graphics2D g2d = (Graphics2D)g;
-        
-        // draw background
-        g2d.setPaint(Color.WHITE);
-        g2d.fill(this.getShapes().get(this.getShapes().size() - 1));
-
-        // draw shapes
-        g2d.setPaint(Color.BLUE);
-        for(Shape shape : this.getShapes()) {
-            g2d.draw(shape);
-        }
-
-        // draw text
-        g2d.setPaint(Color.BLACK);
-        for(int index = 0; index != this.getStrings().size(); ++index) {
-            Point point = this.getStringPoints().get(index);
-            g2d.drawString(this.getStrings().get(index), point.x, point.y);
-        }
-        
-        // draw handler
-        g2d.setPaint(Color.RED);
-        for(int index = 0; index != this.getHandlers().size(); ++index) {
-            g2d.draw(this.getHandlers().get(index));
-        }
-    }
 }

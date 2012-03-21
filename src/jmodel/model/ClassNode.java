@@ -9,21 +9,14 @@ import java.util.ArrayList;
  * Time: 17:56
  *
  */
-public class ClassNode {
-    private String title;
-    private String id;
-    private Model.MODEL_TYPE type; // should fit to the type of model this node belongs to
+public class ClassNode extends Node{
     private ArrayList<String> attributes;
     private ArrayList<String> signals;
 
-    private int pointX, pointY, width, height;
-
     public ClassNode() {
-        this.title = "";
-        this.id = "";
-        this.type = Model.MODEL_TYPE.NONE;
         this.attributes = new ArrayList<String>();
         this.signals = new ArrayList<String>();
+        this.type = Model.MODEL_TYPE.CLASS;
 
         this.pointX = this.pointY = this.width = this.height = 0;
     }
@@ -56,30 +49,6 @@ public class ClassNode {
         this.setAttributes(attributes);
         this.setSignals(signals);
     }
-    
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public Model.MODEL_TYPE getType() {
-        return type;
-    }
-
-    public void setType(Model.MODEL_TYPE type) {
-        this.type = type;
-    }
 
     public ArrayList<String> getAttributes() {
         return attributes;
@@ -111,44 +80,5 @@ public class ClassNode {
     
     public void removeSignal(int index) {
         this.getSignals().remove(index);
-    }
-
-    public int getPointX() {
-        return pointX;
-    }
-
-    public void setPointX(int pointX) {
-        this.pointX = pointX;
-    }
-
-    public int getPointY() {
-        return pointY;
-    }
-
-    public void setPointY(int pointY) {
-        this.pointY = pointY;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    public void setGeometry(int x, int y, int width, int height) {
-        this.setPointX(x);
-        this.setPointY(y);
-        this.setWidth(width);
-        this.setHeight(height);
     }
 }

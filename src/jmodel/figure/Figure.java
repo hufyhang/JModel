@@ -25,8 +25,6 @@ public abstract class Figure {
     }
 
     public abstract void update(Graphics g);
-
-    public abstract void draw(Graphics g);
     
     public void addHandlers() {
         if(this.shapes.isEmpty()) {
@@ -38,7 +36,13 @@ public abstract class Figure {
         this.handlers.add(new Rectangle2D.Float(this.x + this.width - 5, this.y - 5, 10, 10));
         this.handlers.add(new Rectangle2D.Float(this.x - 5, this.y + this.height - 5, 10, 10));
     }
-    
+
+    public void checkWidth(int width) {
+        if(width >= this.getWidth()) {
+            this.setWidth(width + 10);
+        }
+    }
+
     public void removeHandlers() {
         this.handlers.clear();
     }
