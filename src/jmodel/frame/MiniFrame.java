@@ -59,6 +59,10 @@ public class MiniFrame extends JPanel {
         this.ready();
     }
     
+    public Node getSelectedNode() {
+        return this.currentNode;
+    }
+    
     private void addDataset(ArrayList<Shape> shapes, ArrayList<Shape> handlers, 
                             ArrayList<String> text, ArrayList<Point> location) {
         for(Shape handler : handlers) {
