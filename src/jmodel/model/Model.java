@@ -1,7 +1,5 @@
 package jmodel.model;
 
-import jmodel.ctrl.DataTypeController;
-
 import java.util.ArrayList;
 
 /**
@@ -13,21 +11,21 @@ import java.util.ArrayList;
 public class Model {
     public static enum MODEL_TYPE {NONE, CLASS};
     
-    private ArrayList<Node> nodes;
+    private ArrayList<ClassNode> nodes;
     
     public Model() {
-        this.nodes = new ArrayList<Node>();
+        this.nodes = new ArrayList<ClassNode>();
     }
     
-    public ArrayList<Node> getNodes() {
+    public ArrayList<ClassNode> getNodes() {
         return this.nodes;
     }
     
-    public void setNodes(ArrayList<Node> nodes) {
+    public void setNodes(ArrayList<ClassNode> nodes) {
         this.nodes = nodes;
     }
     
-    public void addNode(Node node) {
+    public void addNode(ClassNode node) {
         this.getNodes().add(node);
     }
 
