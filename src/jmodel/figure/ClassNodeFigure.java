@@ -72,6 +72,7 @@ public class ClassNodeFigure extends Figure {
 
             this.checkWidth(fontWidth);
         }
+
         this.setHeight(y - this.getY());
         
         // add boarder

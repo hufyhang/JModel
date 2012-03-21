@@ -127,6 +127,11 @@ public class MiniFrame extends JPanel {
                 fig = new ClassNodeFigure((ClassNode)node);
             }
 
+            // if node is an EntryNode
+            if(node.getClass() == EntryNode.class) {
+                fig = new EntryNodeFigure((EntryNode)node);
+            }
+
             this.figures.add(fig);
         }
     }
@@ -139,6 +144,16 @@ public class MiniFrame extends JPanel {
             // if node is a ClassNode
             if(node.getClass() == ClassNode.class) {
                 fig = new ClassNodeFigure((ClassNode)node);
+                fig.update(g);
+                if(this.handlerList.contains(node.getId())) {
+                    fig.addHandlers();
+                }
+                this.addDataset(fig.getShapes(), fig.getHandlers(), fig.getStrings(), fig.getStringPoints());
+            }
+            
+            // if node is an EntryNode
+            if(node.getClass() == EntryNode.class) {
+                fig = new EntryNodeFigure((EntryNode)node);
                 fig.update(g);
                 if(this.handlerList.contains(node.getId())) {
                     fig.addHandlers();
