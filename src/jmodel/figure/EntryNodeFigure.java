@@ -22,8 +22,8 @@ public class EntryNodeFigure extends Figure {
     public void update(Graphics g) {
         this.setX(this.node.getPointX());
         this.setY(this.node.getPointY());
-        this.setWidth(this.node.getWidth());
-        this.setHeight(this.node.getHeight());
+
+        this.setWidth(0);
 
         Graphics2D g2d = (Graphics2D)g;
         FontMetrics metrics = g2d.getFontMetrics();

@@ -22,6 +22,8 @@ public abstract class Figure {
         this.strings = new ArrayList<String>();
         this.stringPoints = new ArrayList<Point>();
         this.handlers = new ArrayList<Shape>();
+
+        this.width = this.height = 0;
     }
 
     public abstract void update(Graphics g);
@@ -49,6 +51,7 @@ public abstract class Figure {
     public void checkWidth(int width) {
         if(width >= this.getWidth()) {
             this.setWidth(width + 10);
+            this.setX(this.getX() - this.getWidth() / 2);
         }
     }
 

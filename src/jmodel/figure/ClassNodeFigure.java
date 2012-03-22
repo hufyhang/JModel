@@ -22,8 +22,6 @@ public class ClassNodeFigure extends Figure {
     public void update(Graphics g) {
         this.setX(this.node.getPointX());
         this.setY(this.node.getPointY());
-        this.setWidth(this.node.getWidth());
-        this.setHeight(this.node.getHeight());
 
         Graphics2D g2d = (Graphics2D)g;
         FontMetrics metrics = g2d.getFontMetrics();
@@ -32,8 +30,22 @@ public class ClassNodeFigure extends Figure {
         
         int x, y;
         
-        // add title
+        // check width
         String title = this.node.getTitle();
+        fontWidth = metrics.stringWidth(title);
+        this.checkWidth(fontWidth);
+        
+        for(String attribute : this.node.getAttributes()) {
+            fontWidth = metrics.stringWidth(attribute);
+            this.checkWidth(fontWidth);
+        }
+
+        for(String signal : this.node.getSignals()) {
+            fontWidth = metrics.stringWidth(signal);
+            this.checkWidth(fontWidth);
+        }
+        
+        // add title
         fontWidth = metrics.stringWidth(title);
         x = this.getX() + (this.getWidth() / 2 - fontWidth / 2);
         y = this.getY() + fontHeight;

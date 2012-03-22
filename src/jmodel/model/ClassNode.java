@@ -18,7 +18,7 @@ public class ClassNode extends Node{
         this.signals = new ArrayList<String>();
         this.type = Model.MODEL_TYPE.CLASS;
 
-        this.pointX = this.pointY = this.width = this.height = 0;
+        this.pointX = this.pointY = 0;
     }
     
     public ClassNode(String title, String id, Model.MODEL_TYPE type, String[] attributes, String[] signals) {
