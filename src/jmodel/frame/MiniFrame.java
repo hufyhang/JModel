@@ -33,6 +33,7 @@ public class MiniFrame extends JPanel {
     private ArrayList<Figure> figures;
 
     Node currentNode;
+    Point startPoint, endPoint;
 
     public MiniFrame(Graphics graphics) {
         super();
@@ -50,6 +51,9 @@ public class MiniFrame extends JPanel {
         this.handlerList = new ArrayList<String>();
         this.connectors = new ArrayList<Connector>();
         this.connectorLine = new ArrayList<Shape>();
+
+        this.startPoint = new Point();
+        this.endPoint = new Point();
     }
     
     public MiniFrame(Model model, Graphics graphics) {
@@ -123,6 +127,7 @@ public class MiniFrame extends JPanel {
         this.textLocations.clear();
         this.connectors.clear();
         this.connectorLine.clear();
+        this.backgrounds.clear();
     }
 
     public void ready() {
@@ -240,9 +245,22 @@ public class MiniFrame extends JPanel {
 
     private void registerMouseEvents() {
         this.addMouseListener(new MouseAdapter() {
+            
+            @Override
+            public void mouseReleased(MouseEvent evt) {
+                if(currentNode != null) {
+                    endPoint = evt.getPoint();
+                    if(!startPoint.equals(endPoint)) {
+                        currentNode.setGeometry(endPoint.x, endPoint.y);
+                        repaint();
+                    }
+                    startPoint = new Point();
+                    endPoint = new Point();
+                }
+            }
 
             @Override
-            public void mouseClicked(MouseEvent mouseEvent) {
+            public void mousePressed(MouseEvent mouseEvent) {
                 boolean isSelected = false;
                 Point point = mouseEvent.getPoint();
                 for(int index = 0; index != figures.size(); ++index) {
@@ -250,13 +268,18 @@ public class MiniFrame extends JPanel {
                         addHandlerById(model.getNodes().get(index).getId());
                         currentNode = model.getNodes().get(index);
                         isSelected = true;
+                        
+                        startPoint = mouseEvent.getPoint();
                     }
                     else {
                         removeHandlerById(model.getNodes().get(index).getId());
+                        startPoint = endPoint = new Point();
                     }
                 }
                 if(!isSelected) {
                     currentNode = null;
+                    startPoint = new Point();
+                    endPoint = new Point();
                 }
                 repaint();
             }

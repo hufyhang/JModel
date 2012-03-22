@@ -51,8 +51,6 @@ public class ClassNodeFigure extends Figure {
         y = this.getY() + fontHeight;
         Point point = new Point(x, y);
         this.addString(title, point);
-
-//        this.checkWidth(fontWidth);
                 
         // add separator
         x = this.getX();
@@ -66,8 +64,6 @@ public class ClassNodeFigure extends Figure {
             x = this.getX() + (this.getWidth() / 2 - fontWidth / 2);
             this.addString(attribute, new Point(x, y));
             y += fontHeight;
-
-//            this.checkWidth(fontWidth);
         }
         
         // add separator
@@ -81,8 +77,6 @@ public class ClassNodeFigure extends Figure {
             x = this.getX() + (this.getWidth() / 2 - fontWidth / 2);
             this.addString(signal, new Point(x, y));
             y += fontHeight;
-
-//            this.checkWidth(fontWidth);
         }
 
         this.setHeight(y - this.getY());
