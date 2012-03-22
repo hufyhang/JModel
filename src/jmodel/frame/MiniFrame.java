@@ -211,6 +211,7 @@ public class MiniFrame extends JPanel {
 
     public void draw(Graphics g) {
         Graphics2D g2d = (Graphics2D)g;
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         // draw connector
         g2d.setPaint(Color.BLACK);
@@ -251,7 +252,7 @@ public class MiniFrame extends JPanel {
                 if(currentNode != null) {
                     endPoint = evt.getPoint();
                     if(!startPoint.equals(endPoint)) {
-                        currentNode.setGeometry(endPoint.x, endPoint.y);
+                        currentNode.setLocation(endPoint.x, endPoint.y);
                         repaint();
                     }
                     startPoint = new Point();
@@ -289,7 +290,7 @@ public class MiniFrame extends JPanel {
             @Override
             public void mouseDragged(MouseEvent mouseEvent) {
                 if(currentNode != null) {
-                    currentNode.setGeometry(mouseEvent.getPoint().x, mouseEvent.getPoint().y);
+                    currentNode.setLocation(mouseEvent.getPoint().x, mouseEvent.getPoint().y);
                     repaint();
                 }
             }
