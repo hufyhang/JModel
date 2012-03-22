@@ -5,6 +5,7 @@ import jmodel.figure.*;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import javax.swing.*;
@@ -245,7 +246,6 @@ public class MiniFrame extends JPanel {
 
     private void registerMouseEvents() {
         this.addMouseListener(new MouseAdapter() {
-            
             @Override
             public void mouseReleased(MouseEvent evt) {
                 if(currentNode != null) {
@@ -282,6 +282,16 @@ public class MiniFrame extends JPanel {
                     endPoint = new Point();
                 }
                 repaint();
+            }
+        });
+        
+        this.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent mouseEvent) {
+                if(currentNode != null) {
+                    currentNode.setGeometry(mouseEvent.getPoint().x, mouseEvent.getPoint().y);
+                    repaint();
+                }
             }
         });
     }
