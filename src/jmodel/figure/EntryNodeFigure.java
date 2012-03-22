@@ -30,17 +30,19 @@ public class EntryNodeFigure extends Figure {
         int fontHeight = metrics.getHeight();
         int fontWidth;
 
+        // check & set width
+        String title = this.node.getTitle();
+        fontWidth = metrics.stringWidth(title);
+        this.checkWidth(fontWidth);
+
         int x, y;
 
         // add title
-        String title = this.node.getTitle();
-        fontWidth = metrics.stringWidth(title);
         x = this.getX() + (this.getWidth() / 2 - fontWidth / 2);
         y = this.getY() + fontHeight;
         Point point = new Point(x, y);
         this.addString(title, point);
 
-        this.checkWidth(fontWidth);
         y += fontHeight;
         this.setHeight(y - this.getY());
 

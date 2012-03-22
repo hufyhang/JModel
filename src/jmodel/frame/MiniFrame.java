@@ -19,11 +19,15 @@ import java.awt.*;
 public class MiniFrame extends JPanel {
     private Graphics graphics;
     private Model model;
+    
     private ArrayList<Shape> shapes;
     private ArrayList<Shape> backgrounds;
     private ArrayList<Shape> handlers;
     private ArrayList<String> text;
     private ArrayList<Point> textLocations;
+    
+    private ArrayList<Connector> connectors;
+    private ArrayList<Shape> connectorLine;
     
     private ArrayList<String> handlerList;
     private ArrayList<Figure> figures;
@@ -44,6 +48,8 @@ public class MiniFrame extends JPanel {
         this.backgrounds = new ArrayList<Shape>();
         this.figures = new ArrayList<Figure>();
         this.handlerList = new ArrayList<String>();
+        this.connectors = new ArrayList<Connector>();
+        this.connectorLine = new ArrayList<Shape>();
     }
     
     public MiniFrame(Model model, Graphics graphics) {
@@ -115,6 +121,8 @@ public class MiniFrame extends JPanel {
         this.handlers.clear();
         this.text.clear();
         this.textLocations.clear();
+        this.connectors.clear();
+        this.connectorLine.clear();
     }
 
     public void ready() {
@@ -133,6 +141,15 @@ public class MiniFrame extends JPanel {
             }
 
             this.figures.add(fig);
+        }
+        
+        for(Connect con : this.model.getConnects()) {
+            Connector connector = null;
+
+            // TODO: CONNECTOR TYPE
+            connector = new LineConnector(con);
+
+            this.connectors.add(connector);
         }
     }
 
@@ -163,6 +180,18 @@ public class MiniFrame extends JPanel {
 
             this.figures.add(fig);
         }
+
+        for(Connect con : this.model.getConnects()) {
+            Connector connector = null;
+
+            // TODO: CONNECTOR TYPE
+            connector = new LineConnector(con);
+            for(Shape shape : connector.getConnectors()) {
+                this.connectorLine.add(shape);
+            }
+
+            this.connectors.add(connector);
+        }
     }
     
     @Override
@@ -177,7 +206,13 @@ public class MiniFrame extends JPanel {
     public void draw(Graphics g) {
         Graphics2D g2d = (Graphics2D)g;
 
-        // draw background
+        // draw connector
+        g2d.setPaint(Color.BLACK);
+        for(Shape connector : this.connectorLine) {
+            g2d.draw(connector);
+        }
+        
+        // draw nodes' background
         g2d.setPaint(Color.WHITE);
         for(Shape back : this.backgrounds) {
             g2d.fill(back);

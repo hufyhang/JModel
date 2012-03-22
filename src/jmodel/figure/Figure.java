@@ -51,7 +51,7 @@ public abstract class Figure {
     public void checkWidth(int width) {
         if(width >= this.getWidth()) {
             this.setWidth(width + 10);
-            this.setX(this.getX() - this.getWidth() / 2);
+//            this.setX(this.getX() - this.getWidth() / 2);
         }
     }
 

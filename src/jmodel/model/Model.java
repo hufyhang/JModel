@@ -12,11 +12,54 @@ public class Model {
     public static enum MODEL_TYPE {NONE, CLASS};
     
     private ArrayList<Node> nodes;
+    private ArrayList<Connect> connects;
     
     public Model() {
         this.nodes = new ArrayList<Node>();
+        this.connects = new ArrayList<Connect>();
+    }
+
+    public void addConnect(Node nodeA, Node nodeB) {
+        Connect con = new Connect(nodeA, nodeB);
+        this.connects.add(con);
+    }
+
+    public ArrayList<Connect> getConnects() {
+        return this.connects;
+    }
+
+    public ArrayList<Connect> getConnectsByNode(Node node) {
+        ArrayList<Connect> cons = new ArrayList<Connect>();
+        for(Connect con : this.getConnects()) {
+            for(Node n : con.getNodes()) {
+                if(n == node) {
+                    cons.add(con);
+                }
+            }
+        }
+        return cons;
     }
     
+    public ArrayList<Connect> getConnectsByNodeA(Node nodeA) {
+        ArrayList<Connect> cons = new ArrayList<Connect>();
+        for(Connect con : this.getConnects()) {
+            if(con.getNodeA() == nodeA) {
+                cons.add(con);
+            }
+        }
+        return cons;
+    }
+    
+    public ArrayList<Connect> getConnectsByNodeB(Node nodeB) {
+        ArrayList<Connect> cons = new ArrayList<Connect>();
+        for(Connect con : this.getConnects()) {
+            if(con.getNodeB() == nodeB) {
+                cons.add(con);
+            }
+        }
+        return cons;
+    }
+
     public ArrayList<Node> getNodes() {
         return this.nodes;
     }
