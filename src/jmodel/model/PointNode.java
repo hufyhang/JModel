@@ -3,15 +3,16 @@ package jmodel.model;
 /**
  * Created by IntelliJ IDEA.
  * User: Feifei Hang
- * Date: 21/03/2012
- * Time: 19:24
+ * Date: 23/03/2012
+ * Time: 21:31
  */
-public class EntryNode extends Node {
-    public EntryNode() {
+public class PointNode extends Node {
+    public PointNode() {
         this.pointX = this.pointY = 0;
     }
     
-    public EntryNode(String title, String id) {
+    public PointNode(String title, String id) {
+        this();
         this.title = title;
         this.id = id;
     }

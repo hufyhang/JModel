@@ -6,7 +6,6 @@ import jmodel.figure.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import javax.swing.*;
 import java.awt.*;
@@ -141,9 +140,14 @@ public class MiniFrame extends JPanel {
                 fig = new ClassNodeFigure((ClassNode)node);
             }
 
-            // if node is an EntryNode
-            if(node.getClass() == EntryNode.class) {
-                fig = new EntryNodeFigure((EntryNode)node);
+            // if node is an EntityNode
+            if(node.getClass() == EntityNode.class) {
+                fig = new EntityNodeFigure((EntityNode)node);
+            }
+
+            // if node is an PointNode
+            if(node.getClass() == PointNode.class) {
+                fig = new PointNodeFigure((PointNode)node);
             }
 
             this.figures.add(fig);
@@ -174,9 +178,19 @@ public class MiniFrame extends JPanel {
                 this.addDataset(fig.getShapes(), fig.getHandlers(), fig.getStrings(), fig.getStringPoints());
             }
             
-            // if node is an EntryNode
-            if(node.getClass() == EntryNode.class) {
-                fig = new EntryNodeFigure((EntryNode)node);
+            // if node is an EntityNode
+            if(node.getClass() == EntityNode.class) {
+                fig = new EntityNodeFigure((EntityNode)node);
+                fig.update(g);
+                if(this.handlerList.contains(node.getId())) {
+                    fig.addHandlers();
+                }
+                this.addDataset(fig.getShapes(), fig.getHandlers(), fig.getStrings(), fig.getStringPoints());
+            }
+
+            // if node is an PointNode
+            if(node.getClass() == PointNode.class) {
+                fig = new PointNodeFigure((PointNode)node);
                 fig.update(g);
                 if(this.handlerList.contains(node.getId())) {
                     fig.addHandlers();
