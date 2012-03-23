@@ -11,7 +11,7 @@ public abstract class Node {
     String id;
     Model.MODEL_TYPE type; // should fit to the type of model this node belongs to
 
-    int pointX, pointY;
+    int pointX, pointY, width, height;
 
     public Node() {
         this.title = "";
@@ -59,8 +59,32 @@ public abstract class Node {
         this.pointY = pointY;
     }
 
-    public void setGeometry(int x, int y) {
+    public void setGeometry(int x, int y, int width, int height) {
+        this.setPointX(x);
+        this.setPointY(y);             
+        this.width = width;
+        this.height = height;
+    }
+
+
+    public void setLocation(int x, int y) {
         this.setPointX(x);
         this.setPointY(y);
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+    
+    public int getWidth() {
+        return this.width;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+    
+    public int getHeight() {
+        return this.height;
     }
 }
