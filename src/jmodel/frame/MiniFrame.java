@@ -35,8 +35,6 @@ public class MiniFrame extends JPanel {
 
     Node currentNode;
     Point startPoint, endPoint;
-    
-    int preferedWidth, preferedHeight;
 
     public MiniFrame(Graphics graphics) {
         super();
@@ -57,8 +55,6 @@ public class MiniFrame extends JPanel {
 
         this.startPoint = new Point();
         this.endPoint = new Point();
-        
-        this.preferedWidth = this.preferedHeight = 0;
     }
     
     public MiniFrame(Model model, Graphics graphics) {
@@ -203,20 +199,27 @@ public class MiniFrame extends JPanel {
             this.connectors.add(connector);
         }
     }
-    
+/*
     private void updatePreferedSize() {
+        boolean changed = false;
         for(Figure fig : this.figures) {
             if(fig.getX() + fig.getWidth() > this.preferedWidth) {
                 this.preferedWidth = fig.getX() + fig.getWidth();
+                changed = true;
             }
             
             if(fig.getY() + fig.getHeight() > this.preferedHeight) {
                 this.preferedHeight = fig.getY() + fig.getHeight();
+                changed = true;
             }
         }
-        this.setPreferredSize(new Dimension(this.preferedWidth, this.preferedHeight));
+        if(changed) {
+            this.setPreferredSize(new Dimension(this.preferedWidth, this.preferedHeight));
+            updateUI();
+        }
     }
-    
+*/
+
     @Override
     public void paint(Graphics g) {
         // clear all
@@ -224,15 +227,12 @@ public class MiniFrame extends JPanel {
 
         this.updateFigures(g);
         this.draw(g);
-
-        this.updatePreferedSize();
-        this.updateUI();
     }
 
     public void draw(Graphics g) {
         Graphics2D g2d = (Graphics2D)g;
         ((Graphics2D) g).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        
+
         // draw connector
         g2d.setPaint(Color.BLACK);
         for(Shape connector : this.connectorLine) {

@@ -32,4 +32,10 @@ public abstract class Connector {
     public ArrayList<Shape> getConnectors() {
         return this.connectors;
     }
+
+    public static boolean is3POnLine2(double xp, double yp,
+                                      double x1, double y1,
+                                      double x2, double y2) {
+        return (xp - x1) * (y2 - y1) - (yp - y1) * (x2 - x1) == 0 ? true : false;
+    }
 }

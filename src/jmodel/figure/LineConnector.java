@@ -3,7 +3,10 @@ package jmodel.figure;
 import jmodel.model.*;
 
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.GeneralPath;
 import java.awt.geom.Line2D;
+import java.awt.geom.PathIterator;
 
 /**
  * Created by IntelliJ IDEA.
