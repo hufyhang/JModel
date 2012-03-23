@@ -48,9 +48,6 @@ public class EntryNodeFigure extends Figure {
 
         // add boarder
         this.addShape(new Rectangle2D.Float(this.getX(), this.getY(), this.getWidth(), this.getHeight()));
-
-        this.node.setHeight(this.getHeight());
-        this.node.setWidth(this.getWidth());
     }
 
 
