@@ -42,8 +42,8 @@ public class EntryNodeFigure extends Figure {
         y = this.getY() + fontHeight;
         Point point = new Point(x, y);
         this.addString(title, point);
-
         y += fontHeight;
+
         this.setHeight(y - this.getY());
 
         // add boarder
