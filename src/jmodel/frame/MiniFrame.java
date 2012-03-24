@@ -35,6 +35,8 @@ public class MiniFrame extends JPanel {
     Node currentNode;
     Point startPoint, endPoint;
 
+    int preferedWidth, preferedHeight;
+
     public MiniFrame(Graphics graphics) {
         super();
         this.registerMouseEvents();
@@ -54,6 +56,8 @@ public class MiniFrame extends JPanel {
 
         this.startPoint = new Point();
         this.endPoint = new Point();
+
+        this.preferedHeight = this.preferedWidth = 0;
     }
     
     public MiniFrame(Model model, Graphics graphics) {
@@ -213,26 +217,21 @@ public class MiniFrame extends JPanel {
             this.connectors.add(connector);
         }
     }
-/*
+
     private void updatePreferedSize() {
-        boolean changed = false;
         for(Figure fig : this.figures) {
             if(fig.getX() + fig.getWidth() > this.preferedWidth) {
                 this.preferedWidth = fig.getX() + fig.getWidth();
-                changed = true;
             }
             
             if(fig.getY() + fig.getHeight() > this.preferedHeight) {
                 this.preferedHeight = fig.getY() + fig.getHeight();
-                changed = true;
             }
         }
-        if(changed) {
-            this.setPreferredSize(new Dimension(this.preferedWidth, this.preferedHeight));
-            updateUI();
-        }
+        this.setPreferredSize(new Dimension(this.preferedWidth, this.preferedHeight));
+        updateUI();
     }
-*/
+
 
     @Override
     public void paint(Graphics g) {
@@ -241,6 +240,7 @@ public class MiniFrame extends JPanel {
 
         this.updateFigures(g);
         this.draw(g);
+        this.updatePreferedSize();
     }
 
     public void draw(Graphics g) {
