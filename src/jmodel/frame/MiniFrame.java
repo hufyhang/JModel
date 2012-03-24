@@ -33,7 +33,7 @@ public class MiniFrame extends JPanel {
     private ArrayList<Figure> figures;
 
     Node currentNode;
-    Point startPoint, endPoint;
+    Point startPoint, movingStartPoint, endPoint;
 
     int preferedWidth, preferedHeight;
 
@@ -56,6 +56,7 @@ public class MiniFrame extends JPanel {
 
         this.startPoint = new Point();
         this.endPoint = new Point();
+        this.movingStartPoint = new Point();
 
         this.preferedHeight = this.preferedWidth = 0;
     }
@@ -231,6 +232,21 @@ public class MiniFrame extends JPanel {
         this.setPreferredSize(new Dimension(this.preferedWidth, this.preferedHeight));
         updateUI();
     }
+    
+    public void transferNode(Node node, Point oldPoint, Point newPoint) {
+        int transX = newPoint.x - oldPoint.x;
+        int transY = newPoint.y - oldPoint.y;
+        node.setPointX(node.getPointX() + transX);
+        node.setPointY(node.getPointY() + transY);
+
+        // ensure each node cannot be moved out side the canvas in terms of the minimum value of X and Y
+        if(node.getPointX() < 0) {
+            node.setPointX(0);
+        }
+        if(node.getPointY() < 0) {
+            node.setPointY(0);
+        }
+    }
 
 
     @Override
@@ -285,10 +301,9 @@ public class MiniFrame extends JPanel {
             public void mouseReleased(MouseEvent evt) {
                 if(currentNode != null) {
                     endPoint = evt.getPoint();
-                    if(!startPoint.equals(endPoint)) {
-                        currentNode.setLocation(endPoint.x, endPoint.y);
-                        repaint();
-                    }
+                    transferNode(currentNode, movingStartPoint, endPoint);
+                    repaint();
+
                     startPoint = new Point();
                     endPoint = new Point();
                 }
@@ -298,23 +313,23 @@ public class MiniFrame extends JPanel {
             public void mousePressed(MouseEvent mouseEvent) {
                 boolean isSelected = false;
                 Point point = mouseEvent.getPoint();
+                startPoint = point;
+                movingStartPoint = point;
                 for(int index = 0; index != figures.size(); ++index) {
                     if(figures.get(index).getBackground().contains(point)) {
                         addHandlerById(model.getNodes().get(index).getId());
                         currentNode = model.getNodes().get(index);
                         isSelected = true;
-                        
-                        startPoint = mouseEvent.getPoint();
                     }
                     else {
                         removeHandlerById(model.getNodes().get(index).getId());
-                        startPoint = endPoint = new Point();
                     }
                 }
                 if(!isSelected) {
                     currentNode = null;
                     startPoint = new Point();
                     endPoint = new Point();
+                    movingStartPoint = new Point();
                 }
                 repaint();
             }
@@ -324,7 +339,8 @@ public class MiniFrame extends JPanel {
             @Override
             public void mouseDragged(MouseEvent mouseEvent) {
                 if(currentNode != null) {
-                    currentNode.setLocation(mouseEvent.getPoint().x, mouseEvent.getPoint().y);
+                    transferNode(currentNode, movingStartPoint, mouseEvent.getPoint());
+                    movingStartPoint = mouseEvent.getPoint();
                     repaint();
                 }
             }
