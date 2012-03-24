@@ -8,12 +8,27 @@ package jmodel.model;
  */
 public class Connect {
     private Node nodeA, nodeB;
+    private String information;
     
     // TODO: connect type
 
     public Connect(Node nodeA, Node nodeB) {
         this.nodeA = nodeA;
         this.nodeB = nodeB;
+        this.information = "";
+    }
+    
+    public Connect(Node nodeA, Node nodeB, String information) {
+        this(nodeA, nodeB);
+        this.information = information;
+    }
+    
+    public void setInformation(String information) {
+        this.information = information;
+    }
+
+    public String getInformation() {
+        return this.information;
     }
     
     public void setNodeA(Node node) {

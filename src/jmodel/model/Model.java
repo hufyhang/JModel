@@ -24,6 +24,11 @@ public class Model {
         this.connects.add(con);
     }
 
+    public void addConnect(Node nodeA, Node nodeB, String information) {
+        Connect con = new Connect(nodeA, nodeB, information);
+        this.connects.add(con);
+    }
+
     public ArrayList<Connect> getConnects() {
         return this.connects;
     }

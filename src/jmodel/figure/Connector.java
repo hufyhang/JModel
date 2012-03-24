@@ -14,28 +14,49 @@ import jmodel.model.Connect;
 public abstract class Connector {
     private ArrayList<Connect> connects;
     ArrayList<Shape> connectors;
+    Point informationPoint;
+    String information;
 
     public Connector() {
         this.connects = new ArrayList<Connect>();
         this.connectors = new ArrayList<Shape>();
+        this.informationPoint = new Point();
+        this.information = "";
     }
 
-    public Connector(ArrayList<Connect> connects) {
+    public Connector(ArrayList<Connect> connects, String information, Point informationPoint) {
         this();
         this.setConnects(connects);
+        this.setInformation(information);
+        this.setInformationPoint(informationPoint);
+    }
+    
+    public void setInformationPoint(Point point) {
+        this.informationPoint = new Point(point.x, point.y - 5);
     }
 
+    public Point getInformationPoint() {
+        return this.informationPoint;
+    }
+    
+    public void setInformation(String information) {
+        this.information = information;
+    }
+
+    public void setInformation(String information, Point point) {
+        this.information = information;
+        this.setInformationPoint(point);
+    }
+
+    public String getInformation() {
+        return this.information;
+    }
+    
     public void setConnects(ArrayList<Connect> connects) {
         this.connects = connects;
     }
 
     public ArrayList<Shape> getConnectors() {
         return this.connectors;
-    }
-
-    public static boolean is3POnLine2(double xp, double yp,
-                                      double x1, double y1,
-                                      double x2, double y2) {
-        return (xp - x1) * (y2 - y1) - (yp - y1) * (x2 - x1) == 0 ? true : false;
     }
 }

@@ -26,5 +26,6 @@ public class LineConnector extends Connector {
         Point pointB = new Point(nodeB.getPointX() + nodeB.getWidth() / 2, nodeB.getPointY() + nodeB.getHeight() / 2);
         Line2D line = new Line2D.Float(pointA, pointB);
         this.connectors.add(line);
+        this.setInformation(connect.getInformation(), new Point((pointA.x + pointB.x) / 2, (pointA.y + pointB.y) / 2));
     }
 }

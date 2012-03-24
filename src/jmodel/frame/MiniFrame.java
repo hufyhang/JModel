@@ -20,15 +20,20 @@ public class MiniFrame extends JPanel {
     private Graphics graphics;
     private Model model;
     
+    // arraylist for nodes
     private ArrayList<Shape> shapes;
     private ArrayList<Shape> backgrounds;
     private ArrayList<Shape> handlers;
     private ArrayList<String> text;
     private ArrayList<Point> textLocations;
     
+    // arraylist for connectors
     private ArrayList<Connector> connectors;
     private ArrayList<Shape> connectorLine;
+    private ArrayList<String> connectorInformation;
+    private ArrayList<Point> connectorInformationPoint;
     
+    // arraylist for handlers and figures
     private ArrayList<String> handlerList;
     private ArrayList<Figure> figures;
 
@@ -53,6 +58,8 @@ public class MiniFrame extends JPanel {
         this.handlerList = new ArrayList<String>();
         this.connectors = new ArrayList<Connector>();
         this.connectorLine = new ArrayList<Shape>();
+        this.connectorInformation = new ArrayList<String>();
+        this.connectorInformationPoint = new ArrayList<Point>();
 
         this.startPoint = new Point();
         this.endPoint = new Point();
@@ -132,6 +139,8 @@ public class MiniFrame extends JPanel {
         this.textLocations.clear();
         this.connectors.clear();
         this.connectorLine.clear();
+        this.connectorInformation.clear();
+        this.connectorInformationPoint.clear();
         this.backgrounds.clear();
     }
 
@@ -165,6 +174,8 @@ public class MiniFrame extends JPanel {
             connector = new LineConnector(con);
 
             this.connectors.add(connector);
+            this.connectorInformation.add(con.getInformation());
+            this.connectorInformationPoint.add(connector.getInformationPoint());
         }
     }
 
@@ -216,6 +227,8 @@ public class MiniFrame extends JPanel {
             }
 
             this.connectors.add(connector);
+            this.connectorInformation.add(con.getInformation());
+            this.connectorInformationPoint.add(connector.getInformationPoint());
         }
     }
 
@@ -268,7 +281,14 @@ public class MiniFrame extends JPanel {
         for(Shape connector : this.connectorLine) {
             g2d.draw(connector);
         }
-        
+
+        // draw connector Information
+        g2d.setPaint(Color.BLACK);
+        for(int index = 0; index != this.connectorInformation.size(); ++index) {
+            Point point = this.connectorInformationPoint.get(index);
+            g2d.drawString(this.connectorInformation.get(index), point.x, point.y);
+        }
+
         // draw nodes' background
         g2d.setPaint(Color.WHITE);
         for(Shape back : this.backgrounds) {
