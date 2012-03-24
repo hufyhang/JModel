@@ -68,8 +68,16 @@ public class Model {
         this.nodes = nodes;
     }
     
-    public void addNode(Node node) {
+    public boolean addNode(Node node) {
+        String id = node.getId();
+        for(Node n : this.getNodes()) {
+            if(n.getId().equals(id)) {
+                return false;
+            }
+        }
+
         this.getNodes().add(node);
+        return true;
     }
 
     public void removeNode(int index) {
